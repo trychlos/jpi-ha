@@ -1,0 +1,22 @@
+{
+  "domain": "jpi",
+  "name": "JPI",
+  "codeowners": [
+    "@p-wieser"
+  ],
+  "config_flow": true,
+  "single_config_entry": false,
+  "dependencies": [],
+  "documentation": "https://www.home-assistant.io/integrations/jpi",
+  "homekit": {},
+  "integration_type": "device",
+  "iot_class": "local_polling",
+  "quality_scale": "bronze",
+  "requirements": [
+    "pyjpi>=0.1.0",
+    "validators>=0.35.0"
+  ],
+  "ssdp": [],
+  "zeroconf": [],
+  "version": "0.1.0"
+}

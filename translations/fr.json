@@ -1,0 +1,90 @@
+{
+    "title": "JPI",
+    "config": {
+        "abort": {
+            "already_configured": "L'appareil est déjà configuré",
+            "reconfigure_successful": "La mise à jour a été effectuée avec succès"
+        },
+        "error": {
+            "cannot_connect": "Connexion impossible",
+            "device_info": "Impossible d'obtenir les informations sur l'appareil. Etes-vous sûr de l'URL ?",
+            "invalid_url": "URL invalide",
+            "unknown": "Erreur non répertoriée"
+        },
+        "step": {
+            "reconfigure": {
+                "description": "**URL: {url}.\nSeule la configuration de l'appareil peut être modifiée ci-dessous.**",
+                "sections": {
+                    "device_options": {
+                        "name": "Configuration de l'appareil",
+                        "description": "La configuration utilisée pour gérer l'appareil.",
+                        "data": {
+                            "polling_interval": "Intervalle de requête"
+                        },
+                        "data_description": {
+                            "polling_interval": "L'intervalle en secondes entre chaque requête."
+                        }
+                    }
+                },
+                "title": "Configuration de l'appareil"
+            },
+            "user": {
+                "data": {
+                    "url": "URL"
+                },
+                "data_description": {
+                    "url": "L'URL complète de l'appareil, par ex. \"http://hostname.example.com:8080\"."
+                },
+                "sections": {
+                    "device_options": {
+                        "name": "Configuration de l'appareil",
+                        "description": "La configuration utilisée pour gérer l'appareil.",
+                        "data": {
+                            "polling_interval": "Intervalle de requête"
+                        },
+                        "data_description": {
+                            "polling_interval": "L'intervalle en secondes entre chaque requête."
+                        }
+                    }
+                },
+                "title": "Configuration de l'appareil"
+            }
+        }
+    },
+    "entity": {
+        "sensor": {
+            "battery": {
+                "name": "Batterie",
+                "state_attributes": {
+                    "charging": { "name": "En charge" },
+                    "power": { "name": "Alimentation connectée" },
+                    "last_seen": { "name": "Dernière activité" }
+                }
+            }
+        }
+    },
+    "options": {
+        "step": {
+            "options": {
+                "description": "Appareil: {host}:{port}\nSeul les seuils ci-dessous sont configurables.",
+                "sections": {
+                    "battery_options": {
+                        "name": "Battery management",
+                        "description": "The configuration needed to manage the battery of the device.",
+                        "data": {
+                            "high_threshold": "Seuil haut",
+                            "low_threshold": "Seuil bas",
+                            "polling_interval": "Période de requête"
+                        },
+                        "data_description": {
+                            "high_threshold": "Seuil haut, stoppe le cycle de charge courant lorsque le niveau de la batterie l'atteint.",
+                            "low_threshold": "Seuil bas, débute le prochain cycle de charge lorsque le niveau de la batterie l'atteint",
+                            "polling_interval": "La période de requête (en secondes)."
+                        }
+                    }
+                },
+                "title": "Configuration de l'appareil"
+            }
+        }
+    }
+}

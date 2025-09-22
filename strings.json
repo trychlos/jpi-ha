@@ -1,0 +1,65 @@
+{
+  "title": "JPI",
+  "config": {
+    "step": {
+      "reconfigure": {
+        "description": "reconfigure_description",
+        "sections": {
+          "device_options": {
+            "name": "device_options name",
+            "description": "device_options description",
+            "data": {
+              "polling_interval": "polling_interval data"
+            },
+            "data_description": {
+              "polling_interval": "polling_interval description"
+            }
+          }
+        }
+      },
+      "user": {
+        "data": {
+          "url": "[%key:common::config_flow::data::url%]"
+        },
+        "data_description": {
+          "url": "url"
+        },
+        "sections": {
+          "device_options": {
+            "name": "device_options name",
+            "description": "device_options description",
+            "data": {
+              "polling_interval": "polling_interval data"
+            },
+            "data_description": {
+              "polling_interval": "polling_interval description"
+            }
+          }
+        },
+        "title": "user_title"
+      }
+    },
+    "error": {
+      "cannot_connect": "[%key:common::config_flow::error::cannot_connect%]",
+      "device_info": "device_info",
+      "invalid_url": "invalid_url",
+      "unknown": "[%key:common::config_flow::error::unknown%]"
+    },
+    "abort": {
+      "already_configured": "[%key:common::config_flow::abort::already_configured_device%]",
+      "reconfigure_successful": "reconfigure_successful"
+    }
+  },
+  "entity": {
+    "sensor": {
+      "battery": {
+        "name": "Battery",
+        "state_attributes": {
+          "charging": { "name": "Charging" },
+          "power": { "name": "Power connected" },
+          "last_seen": { "name": "Last seen" }
+        }
+      }
+    }
+  }
+}
