@@ -2,6 +2,23 @@
 
 ## ChangeLog
 
+### 0.2.0
+
+    Release date: 2026-09-06
+
+    - Add configuration and reconfiguration flows
+    - Add coordinator-based battery polling and entity availability
+    - Preserve existing device and entity identifiers during migration
+    - Normalize identity handling for newly configured devices
+    - Improve setup, reload, unload, and error handling
+    - Add charging, external-power, and last-seen sensor attributes
+    - Add English and French translations
+    - Add local integration branding
+    - Add installation, configuration, migration, and removal documentation
+    - Add comprehensive Home Assistant integration tests
+    - Add strict typing and align the integration with the Bronze quality scale
+    - Require pyjpi 0.1.28
+
 ### 0.1.0
 
     Release date:
