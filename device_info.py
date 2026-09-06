@@ -31,7 +31,12 @@ class JPIDeviceInfo:
             return False
         ok = False
         if resp:
-            manufacturer, model = resp.split( ' ', 1 )
+            manufacturer, separator, model = resp.partition(" ")
+            manufacturer = manufacturer.strip()
+            model = model.strip()
+            if not separator or not manufacturer or not model:
+                _LOGGER.debug("Invalid JPI device name: %s", resp)
+                return False
             self._manufacturer = manufacturer
             self._model = model
             ok = True
