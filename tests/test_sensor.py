@@ -4,14 +4,14 @@ from datetime import datetime
 from unittest.mock import AsyncMock
 
 from homeassistant.components.jpi.const import DOMAIN
-from homeassistant.components.jpi.coordinator import JPICoordinator
+from homeassistant.components.jpi.coordinator import JPICoordinator, JPICoordinatorData
 from homeassistant.components.jpi.sensor import JPIBatterySensor
 from homeassistant.core import HomeAssistant
 from homeassistant.util import dt as dt_util
 
-from tests.common import MockConfigEntry
-
 from .const import BATTERY_INFO
+
+from tests.common import MockConfigEntry
 
 
 def test_sensor_uses_coordinator_data(
@@ -23,7 +23,7 @@ def test_sensor_uses_coordinator_data(
     hass.data[DOMAIN] = {"jpi": mock_jpi}
     coordinator = JPICoordinator(hass, mock_config_entry)
     last_seen = dt_util.now()
-    coordinator.data = {**BATTERY_INFO, "last_seen": last_seen}
+    coordinator.data = JPICoordinatorData(**BATTERY_INFO, last_seen=last_seen)
 
     sensor = JPIBatterySensor(coordinator)
 

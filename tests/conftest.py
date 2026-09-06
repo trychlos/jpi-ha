@@ -4,6 +4,7 @@ from collections.abc import AsyncGenerator, Generator
 from unittest.mock import AsyncMock, patch
 
 import pytest
+
 from homeassistant.components.jpi.const import (
     DOMAIN,
     JPI_CONF_DEVICE_OPTIONS,
@@ -11,9 +12,10 @@ from homeassistant.components.jpi.const import (
 )
 from homeassistant.const import CONF_URL
 from homeassistant.core import HomeAssistant
-from tests.common import MockConfigEntry
 
 from .const import BATTERY_INFO, DEVICE_NAME, POLLING_INTERVAL, URL
+
+from tests.common import MockConfigEntry
 
 
 @pytest.fixture

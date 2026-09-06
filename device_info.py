@@ -1,6 +1,4 @@
-"""The JPI Device Informations, aka Manufacturer Model"""
-
-from __future__ import annotations
+"""Information about a JPI device."""
 
 import logging
 
@@ -12,18 +10,23 @@ from .const import DOMAIN
 from .device_config import JPIDeviceConfig
 
 # Define a logger.
-_LOGGER = logging.getLogger( __name__ )
+_LOGGER = logging.getLogger(__name__)
+
 
 class JPIDeviceInfo:
-    """A class dedicated to get device informations"""
+    """Fetch and expose JPI device information."""
 
-    def __init__( self ):
-        self._manufacturer = None
-        self._model = None
+    def __init__(self) -> None:
+        """Initialize empty device information."""
+        self._manufacturer: str | None = None
+        self._model: str | None = None
 
-    async def fetch_device_info( self, hass: HomeAssistant, config: JPIDeviceConfig ):
+    async def fetch_device_info(
+        self, hass: HomeAssistant, config: JPIDeviceConfig
+    ) -> bool:
+        """Fetch manufacturer and model information."""
         url = config.url()
-        jpi = hass.data[DOMAIN]['jpi']
+        jpi = hass.data[DOMAIN]["jpi"]
         try:
             resp = await jpi.getDeviceName(url)
         except JPIError:
@@ -42,8 +45,10 @@ class JPIDeviceInfo:
             ok = True
         return ok
 
-    def manufacturer( self ):
+    def manufacturer(self) -> str | None:
+        """Return the device manufacturer."""
         return self._manufacturer
-    
-    def model( self ):
+
+    def model(self) -> str | None:
+        """Return the device model."""
         return self._model

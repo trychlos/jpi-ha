@@ -1,7 +1,5 @@
 """Constants for the JPI integration."""
 
-from __future__ import annotations
-
 from typing import Final
 
 from homeassistant.const import Platform
@@ -17,7 +15,7 @@ JPI_CONF_LEGACY_IDENTIFIER = "legacy_identifier"
 
 DEF_HIGH_THRESHOLD: Final = 95
 DEF_LOW_THRESHOLD: Final = 15
-DEF_POLLING_INTERVAL: Final = 300 # 5 min
+DEF_POLLING_INTERVAL: Final = 300  # 5 min
 DEF_PORT: Final = 8080
 
 PLATFORMS: list[Platform] = [Platform.SENSOR]

@@ -3,6 +3,7 @@
 from unittest.mock import AsyncMock
 
 import pytest
+
 from homeassistant import config_entries
 from homeassistant.components.jpi import async_migrate_entry
 from homeassistant.components.jpi.const import (
@@ -14,9 +15,10 @@ from homeassistant.components.jpi.const import (
 from homeassistant.const import CONF_URL
 from homeassistant.core import HomeAssistant
 from homeassistant.data_entry_flow import FlowResultType
-from tests.common import MockConfigEntry
 
 from .const import POLLING_INTERVAL, URL
+
+from tests.common import MockConfigEntry
 
 pytestmark = pytest.mark.usefixtures("mock_setup_entry")
 

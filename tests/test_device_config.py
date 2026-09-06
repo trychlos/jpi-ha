@@ -7,9 +7,10 @@ from homeassistant.components.jpi.const import (
     JPI_CONF_POLLING_INTERVAL,
 )
 from homeassistant.components.jpi.device_config import JPIDeviceConfig
-from tests.common import MockConfigEntry
 
 from .const import POLLING_INTERVAL, URL
+
+from tests.common import MockConfigEntry
 
 
 def test_device_config_from_dict() -> None:

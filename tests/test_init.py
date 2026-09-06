@@ -7,6 +7,7 @@ from homeassistant.components.jpi.const import DOMAIN, JPI_CONF_LEGACY_IDENTIFIE
 from homeassistant.config_entries import ConfigEntryState
 from homeassistant.const import STATE_UNAVAILABLE
 from homeassistant.core import HomeAssistant
+
 from tests.common import MockConfigEntry
 
 

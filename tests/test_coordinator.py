@@ -10,9 +10,9 @@ from homeassistant.core import HomeAssistant
 from homeassistant.helpers.update_coordinator import UpdateFailed
 from homeassistant.util import dt as dt_util
 
-from tests.common import MockConfigEntry
-
 from .const import BATTERY_INFO, URL
+
+from tests.common import MockConfigEntry
 
 
 async def test_update_data_success(
