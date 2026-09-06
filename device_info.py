@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import logging
 
+from pyjpi import JPIError
+
 from homeassistant.core import HomeAssistant
 
 from .const import DOMAIN
@@ -22,7 +24,11 @@ class JPIDeviceInfo:
     async def fetch_device_info( self, hass: HomeAssistant, config: JPIDeviceConfig ):
         url = config.url()
         jpi = hass.data[DOMAIN]['jpi']
-        resp = await jpi.getDeviceName( url )
+        try:
+            resp = await jpi.getDeviceName(url)
+        except JPIError:
+            _LOGGER.debug("Unable to fetch JPI device information", exc_info=True)
+            return False
         ok = False
         if resp:
             manufacturer, model = resp.split( ' ', 1 )
