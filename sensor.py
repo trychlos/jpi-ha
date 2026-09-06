@@ -16,9 +16,9 @@ from homeassistant.const import PERCENTAGE
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.device_registry import DeviceInfo
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
-from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
 from .const import DOMAIN
+from .coordinator import JPIConfigEntry
 from .entity import JPIEntity
 
 # Define a logger.
@@ -106,4 +106,3 @@ class JPIBatterySensor( JPIEntity, SensorEntity ):
             _LOGGER.warning( f"_async_update_data errors={self._status['errors']}" )
         _LOGGER.debug( f"_async_update_data config.name() result={self._status}" )
         return self._status
-

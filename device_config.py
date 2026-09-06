@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import logging
+from typing import Any
 from urllib.parse import urlparse
 
 from homeassistant.config_entries import ConfigEntry
@@ -19,7 +20,7 @@ class JPIDeviceConfig:
     - or an ConfigEntry instance
     """
 
-    def __init__( self, entry: JPIConfigEntry | dict[str, Any] ):
+    def __init__(self, entry: ConfigEntry | dict[str, Any]):
         _LOGGER.debug( f"JPIDeviceConfig::__init__()" )
         self._entry = None
         # if the provide entry is really a JPIConfigEntry

@@ -2,14 +2,12 @@
 
 from __future__ import annotations
 
-import async_timeout
 from datetime import timedelta
 import logging
 
-from homeassistant.components.sensor import SensorEntity
+from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
-from homeassistant.helpers import entity_registry as er
-from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
+from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 
 from .const import DEF_POLLING_INTERVAL, DOMAIN, JPI_CONF_DEVICE_OPTIONS, JPI_CONF_POLLING_INTERVAL
 from .device_config import JPIDeviceConfig
@@ -18,9 +16,8 @@ from .device_info import JPIDeviceInfo
 # Define a logger.
 _LOGGER = logging.getLogger( __name__ )
 
-# Create ConfigEntry type alias with runtime data object.
-# This tells the type checker: “when I say JPIConfigEntry, I mean a ConfigEntry whose runtime_data is of type JPIRuntimeData."
-type JPIConfigEntry = ConfigEntry[JPICoordinator]  # noqa: F821
+# A JPI config entry stores its coordinator as runtime data.
+type JPIConfigEntry = ConfigEntry[JPICoordinator]
 
 
 class JPICoordinator( DataUpdateCoordinator[dict] ):

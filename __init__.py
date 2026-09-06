@@ -6,18 +6,17 @@ See also https://community.jeedom.com/t/jpi-apk-android-tel-android-dedie-domoti
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import logging
-from pyjpi import jpiInit
-import voluptuous as vol
 
-from homeassistant.const import CONF_HOST, CONF_PORT
+from pyjpi import jpiInit
+
 from homeassistant.core import HomeAssistant
 from homeassistant.exceptions import ConfigEntryNotReady
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
+from homeassistant.helpers.typing import ConfigType
 
 from .const import DOMAIN, PLATFORMS
-from .coordinator import JPICoordinator
+from .coordinator import JPIConfigEntry, JPICoordinator
 from .services import async_setup_services
 
 # Define a logger.
@@ -99,4 +98,3 @@ async def async_unload_entry( hass: HomeAssistant, entry: JPIConfigEntry ) -> bo
         entry.runtime_data = None
         _LOGGER.debug( f"async_unload_entry() entry_id={entry.entry_id}" )
     return unload_ok
-
