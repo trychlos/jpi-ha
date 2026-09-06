@@ -1,53 +1,50 @@
 {
-    "title": "JPI",
     "config": {
         "abort": {
             "already_configured": "Device is already configured",
-            "reconfigure_successful": "The reconfiguration has been successful"
+            "reconfigure_successful": "JPI was reconfigured successfully."
         },
         "error": {
-            "cannot_connect": "Failed to connect",
-            "device_info": "Unable to fetch device info. Are you sure of your URL ?",
-            "invalid_url": "Invalid URL",
-            "unknown": "Unexpected error"
+            "device_info": "Unable to retrieve device information. Check the URL and ensure that JPI is running.",
+            "invalid_url": "The URL is invalid."
         },
         "step": {
             "reconfigure": {
-                "description": "**URL: {url}.\nOnly below options are configurable after the initial creation.**",
+                "description": "The device URL is {url}. Only the options below can be changed.",
                 "sections": {
                     "device_options": {
-                        "name": "Device configuration",
-                        "description": "The configuration needed to manage the device.",
                         "data": {
                             "polling_interval": "Polling interval"
                         },
                         "data_description": {
-                            "polling_interval": "The polling interval (in seconds)."
-                        }
+                            "polling_interval": "Time in seconds between device updates."
+                        },
+                        "description": "Options used to communicate with the device.",
+                        "name": "Device options"
                     }
                 },
-                "title": "Device configuration"
+                "title": "Reconfigure JPI"
             },
             "user": {
                 "data": {
                     "url": "URL"
                 },
                 "data_description": {
-                    "url": "Full URL of the device, e.g. \"http://host.example.com:8080\"."
+                    "url": "Full URL of the device, for example http://host.example.com:8080."
                 },
                 "sections": {
                     "device_options": {
-                        "name": "Device configuration",
-                        "description": "The configuration needed to manage the device.",
                         "data": {
                             "polling_interval": "Polling interval"
                         },
                         "data_description": {
-                            "polling_interval": "The polling interval (in seconds)."
-                        }
+                            "polling_interval": "Time in seconds between device updates."
+                        },
+                        "description": "Options used to communicate with the device.",
+                        "name": "Device options"
                     }
                 },
-                "title": "Device configuration"
+                "title": "Set up JPI"
             }
         }
     },
@@ -56,11 +53,18 @@
             "battery": {
                 "name": "Battery",
                 "state_attributes": {
-                    "charging": { "name": "Charging" },
-                    "power": { "name": "Power connected" },
-                    "last_seen": { "name": "Last seen" }
+                    "charging": {
+                        "name": "Charging"
+                    },
+                    "last_seen": {
+                        "name": "Last seen"
+                    },
+                    "power": {
+                        "name": "Power connected"
+                    }
                 }
             }
         }
-    }
+    },
+    "title": "JPI"
 }

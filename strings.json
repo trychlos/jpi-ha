@@ -3,16 +3,17 @@
   "config": {
     "step": {
       "reconfigure": {
-        "description": "reconfigure_description",
+        "title": "Reconfigure JPI",
+        "description": "The device URL is {url}. Only the options below can be changed.",
         "sections": {
           "device_options": {
-            "name": "device_options name",
-            "description": "device_options description",
+            "name": "Device options",
+            "description": "Options used to communicate with the device.",
             "data": {
-              "polling_interval": "polling_interval data"
+              "polling_interval": "Polling interval"
             },
             "data_description": {
-              "polling_interval": "polling_interval description"
+              "polling_interval": "Time in seconds between device updates."
             }
           }
         }
@@ -22,32 +23,30 @@
           "url": "[%key:common::config_flow::data::url%]"
         },
         "data_description": {
-          "url": "url"
+          "url": "Full URL of the device, for example http://host.example.com:8080."
         },
         "sections": {
           "device_options": {
-            "name": "device_options name",
-            "description": "device_options description",
+            "name": "Device options",
+            "description": "Options used to communicate with the device.",
             "data": {
-              "polling_interval": "polling_interval data"
+              "polling_interval": "Polling interval"
             },
             "data_description": {
-              "polling_interval": "polling_interval description"
+              "polling_interval": "Time in seconds between device updates."
             }
           }
         },
-        "title": "user_title"
+        "title": "Set up JPI"
       }
     },
     "error": {
-      "cannot_connect": "[%key:common::config_flow::error::cannot_connect%]",
-      "device_info": "device_info",
-      "invalid_url": "invalid_url",
-      "unknown": "[%key:common::config_flow::error::unknown%]"
+      "device_info": "Unable to retrieve device information. Check the URL and ensure that JPI is running.",
+      "invalid_url": "The URL is invalid."
     },
     "abort": {
       "already_configured": "[%key:common::config_flow::abort::already_configured_device%]",
-      "reconfigure_successful": "reconfigure_successful"
+      "reconfigure_successful": "JPI was reconfigured successfully."
     }
   },
   "entity": {
