@@ -3,17 +3,16 @@
 from unittest.mock import AsyncMock
 
 import pytest
-
 from homeassistant import config_entries
 from homeassistant.components.jpi.const import (
     DOMAIN,
     JPI_CONF_DEVICE_OPTIONS,
+    JPI_CONF_LEGACY_IDENTIFIER,
     JPI_CONF_POLLING_INTERVAL,
 )
 from homeassistant.const import CONF_URL
 from homeassistant.core import HomeAssistant
 from homeassistant.data_entry_flow import FlowResultType
-
 from tests.common import MockConfigEntry
 
 from .const import POLLING_INTERVAL, URL
@@ -64,6 +63,7 @@ async def test_user_flow_success(
             JPI_CONF_POLLING_INTERVAL: POLLING_INTERVAL,
         },
     }
+    assert result["result"].unique_id == "phone.example.com:8080"
     mock_jpi.getDeviceName.assert_awaited_once_with(URL)
     mock_setup_entry.assert_awaited_once()
 
@@ -147,6 +147,33 @@ async def test_user_flow_aborts_duplicate(
     assert result["reason"] == "already_configured"
 
 
+async def test_user_flow_allows_same_short_name_on_different_endpoint(
+    hass: HomeAssistant,
+    mock_jpi: AsyncMock,
+    mock_config_entry: MockConfigEntry,
+) -> None:
+    """Test full endpoints distinguish hosts with the same first label."""
+    enable_jpi(hass, mock_jpi)
+    mock_config_entry.add_to_hass(hass)
+
+    result = await hass.config_entries.flow.async_init(
+        DOMAIN,
+        context={"source": config_entries.SOURCE_USER},
+    )
+    result = await hass.config_entries.flow.async_configure(
+        result["flow_id"],
+        {
+            CONF_URL: "http://phone.example.net:8081",
+            JPI_CONF_DEVICE_OPTIONS: {
+                JPI_CONF_POLLING_INTERVAL: POLLING_INTERVAL,
+            },
+        },
+    )
+
+    assert result["type"] is FlowResultType.CREATE_ENTRY
+    assert result["result"].unique_id == "phone.example.net:8081"
+
+
 async def test_reconfigure_updates_polling_interval(
     hass: HomeAssistant,
     mock_config_entry: MockConfigEntry,
@@ -180,4 +207,5 @@ async def test_reconfigure_updates_polling_interval(
         JPI_CONF_DEVICE_OPTIONS: {
             JPI_CONF_POLLING_INTERVAL: 60,
         },
+        JPI_CONF_LEGACY_IDENTIFIER: "PHONE",
     }

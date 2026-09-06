@@ -9,6 +9,8 @@ from urllib.parse import urlparse
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import CONF_URL
 
+from .const import JPI_CONF_LEGACY_IDENTIFIER
+
 # Define a logger.
 _LOGGER = logging.getLogger( __name__ )
 
@@ -23,10 +25,12 @@ class JPIDeviceConfig:
     def __init__(self, entry: ConfigEntry | dict[str, Any]):
         _LOGGER.debug( f"JPIDeviceConfig::__init__()" )
         self._entry = None
+        self._entry_id = None
         # if the provide entry is really a JPIConfigEntry
         if isinstance( entry, ConfigEntry ):
             _LOGGER.debug( f"JPIConfigEntry: {entry.data}" )
             self._entry = entry.data
+            self._entry_id = entry.entry_id
         # if the provided 'entry' is actually a user input from ConfigFlow
         # but the url is missing from user_input when reconfiguring
         # so only use in 'user' case on first configuration
@@ -48,8 +52,22 @@ class JPIDeviceConfig:
         return self._data().get( key, default )
 
     def id( self ):
-        """Compute the (unique) ID attributed to this JPIConfigEntry."""
-        return self.name()
+        """Return the stable internal identifier for this device."""
+        return self.get(
+            JPI_CONF_LEGACY_IDENTIFIER,
+            self._entry_id or self.name(),
+        )
+
+    def endpoint_id(self) -> str:
+        """Return the normalized endpoint used for duplicate detection."""
+        parsed = urlparse(self.url())
+        host = parsed.hostname.lower().rstrip(".")
+        port = parsed.port
+        if port is None:
+            port = 443 if parsed.scheme.lower() == "https" else 80
+        if ":" in host:
+            host = f"[{host}]"
+        return f"{host}:{port}"
 
     def name( self ):
         """Compute the (unique) name from the URL."""

@@ -15,12 +15,32 @@ from homeassistant.exceptions import ConfigEntryNotReady
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 from homeassistant.helpers.typing import ConfigType
 
-from .const import DOMAIN, PLATFORMS
+from .const import DOMAIN, JPI_CONF_LEGACY_IDENTIFIER, PLATFORMS
 from .coordinator import JPIConfigEntry, JPICoordinator
+from .device_config import JPIDeviceConfig
 from .services import async_setup_services
 
 # Define a logger.
 _LOGGER = logging.getLogger( __name__ )
+
+
+async def async_migrate_entry(
+    hass: HomeAssistant,
+    entry: JPIConfigEntry,
+) -> bool:
+    """Preserve identifiers assigned before config-entry version 2."""
+    if entry.version == 1:
+        data = {
+            **entry.data,
+            JPI_CONF_LEGACY_IDENTIFIER: JPIDeviceConfig(entry).name(),
+        }
+        hass.config_entries.async_update_entry(
+            entry,
+            data=data,
+            version=2,
+        )
+
+    return True
 
 
 async def async_setup( hass: HomeAssistant, config: ConfigType ) -> bool:

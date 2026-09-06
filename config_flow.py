@@ -88,7 +88,7 @@ class JpiConfigFlow( ConfigFlow, domain=DOMAIN ):
             polling_interval: <interval>
     """
 
-    VERSION = 1
+    VERSION = 2
 
     async def async_step_user( self, user_input: dict[str, Any] | None = None ) -> ConfigFlowResult:
         """Handle the initial step."""
@@ -102,8 +102,17 @@ class JpiConfigFlow( ConfigFlow, domain=DOMAIN ):
                 return self.async_show_form( step_id=step_id, data_schema=schema, errors=errors )
             # Success path.
             conf = JPIDeviceConfig( user_input )
-            # Make sure we do not have already configured this entity.
-            await self.async_set_unique_id( conf.id())
+            endpoint_id = conf.endpoint_id()
+
+            # Legacy entries have hostname-based unique IDs, so compare their
+            # configured endpoints explicitly as well.
+            if any(
+                JPIDeviceConfig(entry).endpoint_id() == endpoint_id
+                for entry in self.hass.config_entries.async_entries(DOMAIN)
+            ):
+                return self.async_abort(reason="already_configured")
+
+            await self.async_set_unique_id(endpoint_id)
             self._abort_if_unique_id_configured()
             # And create the entry.
             return self.async_create_entry( title=conf.name(), data=user_input )

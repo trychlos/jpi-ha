@@ -13,6 +13,7 @@ JPI_CONF_BATTERY_OPTIONS = "battery_options"
 JPI_CONF_HIGH_THRESHOLD = "high_threshold"
 JPI_CONF_LOW_THRESHOLD = "low_threshold"
 JPI_CONF_POLLING_INTERVAL = "polling_interval"
+JPI_CONF_LEGACY_IDENTIFIER = "legacy_identifier"
 
 DEF_HIGH_THRESHOLD: Final = 95
 DEF_LOW_THRESHOLD: Final = 15
