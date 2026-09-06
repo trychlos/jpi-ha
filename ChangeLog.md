@@ -6,6 +6,8 @@
 
     Release date:
 
+    - Fix integration branding in the Home Assistant UI
+
 ### 0.2.0
 
     Release date: 2026-09-06

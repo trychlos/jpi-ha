@@ -8,7 +8,7 @@ rules:
     comment: polling interval is configurable on a per-device basis, defaulting to 5 min
   brands:
     status: done
-    comment: local branding is provided in brand/logo.png
+    comment: local branding is provided in brand/icon.png
   common-modules:
     status: done
     comment: have coordinator.py and entity.py
