@@ -6,19 +6,33 @@ rules:
   appropriate-polling:
     status: done
     comment: polling interval is configurable on a per-device basis, defaulting to 5 min
-  brands: todo
+  brands:
+    status: done
+    comment: local branding is provided in brand/logo.png
   common-modules:
     status: done
     comment: have coordinator.py and entity.py
-  config-flow-test-coverage: todo
+  config-flow-test-coverage:
+    status: done
+    comment: user and reconfigure flows, validation failures, and duplicate detection are tested
   config-flow:
     status: done
     comment: manage user and reconfigure data steps, no options
-  dependency-transparency: todo
-  docs-actions: todo
-  docs-high-level-description: todo
-  docs-installation-instructions: todo
-  docs-removal-instructions: todo
+  dependency-transparency:
+    status: done
+    comment: runtime dependencies are pinned and published from public source repositories
+  docs-actions:
+    status: exempt
+    comment: JPI does not provide actions
+  docs-conditions:
+    status: exempt
+    comment: JPI does not provide conditions
+  docs-high-level-description: done
+  docs-installation-instructions: done
+  docs-removal-instructions: done
+  docs-triggers:
+    status: exempt
+    comment: JPI does not provide triggers
   entity-event-setup:
     status: exempt
     comment: entities do not subscribe to events
