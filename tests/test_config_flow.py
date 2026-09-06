@@ -4,6 +4,7 @@ from unittest.mock import AsyncMock
 
 import pytest
 from homeassistant import config_entries
+from homeassistant.components.jpi import async_migrate_entry
 from homeassistant.components.jpi.const import (
     DOMAIN,
     JPI_CONF_DEVICE_OPTIONS,
@@ -180,6 +181,9 @@ async def test_reconfigure_updates_polling_interval(
 ) -> None:
     """Test changing the polling interval while preserving the URL."""
     mock_config_entry.add_to_hass(hass)
+    await async_migrate_entry(hass, mock_config_entry)
+    update_listener = AsyncMock()
+    mock_config_entry.add_update_listener(update_listener)
 
     result = await hass.config_entries.flow.async_init(
         DOMAIN,
@@ -199,9 +203,11 @@ async def test_reconfigure_updates_polling_interval(
             },
         },
     )
+    await hass.async_block_till_done()
 
     assert result["type"] is FlowResultType.ABORT
     assert result["reason"] == "reconfigure_successful"
+    update_listener.assert_awaited_once_with(hass, mock_config_entry)
     assert mock_config_entry.data == {
         CONF_URL: URL,
         JPI_CONF_DEVICE_OPTIONS: {

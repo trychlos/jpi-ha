@@ -125,9 +125,8 @@ class JpiConfigFlow( ConfigFlow, domain=DOMAIN ):
         errors: dict[str, str] = {}
         entry = self._get_reconfigure_entry()
         if user_input is not None:
-            # TODO: maybe could we just update the poll interval directly into the coordinator instead of reinstanciating all the stuff..
             _LOGGER.debug( f"async_step_reconfigure() user_input:{user_input}" )
-            return self.async_update_reload_and_abort( entry, data_updates=user_input )
+            return self.async_update_and_abort( entry, data_updates=user_input )
 
         step_id = "reconfigure"
         conf = JPIDeviceConfig( entry )
