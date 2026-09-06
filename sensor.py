@@ -4,7 +4,6 @@ Implements BATTERY entity.
 
 from __future__ import annotations
 
-from datetime import datetime
 import logging
 
 from homeassistant.components.sensor import (
@@ -44,14 +43,6 @@ class JPIBatterySensor( JPIEntity, SensorEntity ):
         _LOGGER.debug( f"JPIBatterySensor::__init__()" )
         super().__init__( coordinator )
         SensorEntity.__init__( self )
-        self._status = {
-            "level": 0,
-            "last_seen": 0,
-            "charging": False,
-            "power": False,
-            "errors": 0
-        }
-        coordinator._battery_sensor = self
 
         # Entity display name – because _attr_has_entity_name=True,
         # this will be shown as "<Device Name>: Battery" in the UI
@@ -75,8 +66,7 @@ class JPIBatterySensor( JPIEntity, SensorEntity ):
         return {
             'last_seen': data.get( 'last_seen', 0 ),
             'charging': data.get( 'charging', False ),
-            'power': data.get( 'power', False ),
-            'errors': data.get( 'errors', False )
+            'power': data.get( 'power', False )
         }
 
     @property
@@ -91,18 +81,3 @@ class JPIBatterySensor( JPIEntity, SensorEntity ):
             #configuration_url=self._url,                # optional: clickable link
             # via_device=(DOMAIN, "your_hub_id"),       # only if this device is behind a hub
         )
-
-    async def _async_update_data( self ):
-        url = self._config.url()
-        jpi = self.hass.data[DOMAIN]['jpi']
-        # get battery informations
-        result = await jpi.battInfo( url )
-        if result:
-            self._status = result
-            self._status['errors'] = 0
-            self._status['last_seen'] = datetime.now()
-        else:
-            self._status['errors'] += 1
-            _LOGGER.warning( f"_async_update_data errors={self._status['errors']}" )
-        _LOGGER.debug( f"_async_update_data config.name() result={self._status}" )
-        return self._status
