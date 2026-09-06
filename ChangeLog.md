@@ -2,9 +2,9 @@
 
 ## ChangeLog
 
-### 0.2.1-rc.0
+### 0.2.1
 
-    Release date:
+    Release date: 2026-09-06
 
     - Fix integration branding in the Home Assistant UI
 
