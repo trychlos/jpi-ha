@@ -1,20 +1,37 @@
 """Common fixtures for the JPI integration tests."""
 
-from collections.abc import Generator
+from collections.abc import AsyncGenerator, Generator
 from unittest.mock import AsyncMock, patch
 
 import pytest
-
 from homeassistant.components.jpi.const import (
     DOMAIN,
     JPI_CONF_DEVICE_OPTIONS,
     JPI_CONF_POLLING_INTERVAL,
 )
 from homeassistant.const import CONF_URL
-
+from homeassistant.core import HomeAssistant
 from tests.common import MockConfigEntry
 
 from .const import BATTERY_INFO, DEVICE_NAME, POLLING_INTERVAL, URL
+
+
+@pytest.fixture
+async def init_integration(
+    hass: HomeAssistant,
+    mock_jpi: AsyncMock,
+    mock_config_entry: MockConfigEntry,
+) -> AsyncGenerator[MockConfigEntry]:
+    """Set up a JPI config entry through Home Assistant."""
+    mock_config_entry.add_to_hass(hass)
+
+    with patch(
+        "homeassistant.components.jpi.jpiInit",
+        return_value=mock_jpi,
+    ):
+        assert await hass.config_entries.async_setup(mock_config_entry.entry_id)
+        await hass.async_block_till_done()
+        yield mock_config_entry
 
 
 @pytest.fixture
