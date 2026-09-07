@@ -2,9 +2,9 @@
 
 ## ChangeLog
 
-### 0.3.0-rc.0
+### 0.3.0
 
-    Release date:
+    Release date: 2026-09-07
 
     - Adopt the standard HACS custom integration layout
     - Update pyjpi to 0.1.29
