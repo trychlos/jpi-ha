@@ -7,6 +7,7 @@
     Release date:
 
     - Provide compliant 1x and 2x icons for HACS branding
+    - Update pyjpi to 0.1.30
 
 ### 0.3.0
 
