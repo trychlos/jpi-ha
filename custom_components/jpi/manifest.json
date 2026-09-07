@@ -14,7 +14,7 @@
   "issue_tracker": "https://github.com/trychlos/jpi-ha/issues",
   "quality_scale": "bronze",
   "requirements": [
-    "pyjpi==0.1.28",
+    "pyjpi==0.1.29",
     "validators==0.35.0"
   ],
   "ssdp": [],

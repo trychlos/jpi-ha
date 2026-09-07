@@ -7,6 +7,7 @@
     Release date:
 
     - Adopt the standard HACS custom integration layout
+    - Update pyjpi to 0.1.29
 
 ### 0.2.1
 
