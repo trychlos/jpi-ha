@@ -24,33 +24,22 @@ the device over the local network through the `pyjpi` asynchronous library.
 
 ## Installation
 
-JPI is a manually installed custom integration. It is not bundled with Home
-Assistant and is not currently distributed through HACS.
+JPI can be installed as a HACS custom repository:
 
-Clone the repository directly into the Home Assistant custom-components
-directory:
+1. Open HACS.
+2. Open the menu and select **Custom repositories**.
+3. Add `https://github.com/trychlos/jpi-ha`.
+4. Select **Integration** as the repository type.
+5. Download JPI and restart Home Assistant.
 
-```shell
-cd /config/custom_components
-git clone https://github.com/trychlos/jpi-ha.git jpi
-```
-
-The resulting path must contain:
+For a manual installation, download a release and copy its
+`custom_components/jpi` directory to:
 
 ```text
-/config/custom_components/jpi/manifest.json
+/config/custom_components/jpi
 ```
 
 Restart Home Assistant after installation or upgrade.
-
-To update an installation created this way:
-
-```shell
-git -C /config/custom_components/jpi pull --ff-only
-```
-
-This approach keeps one working copy and does not require duplicating the
-integration files.
 
 ## Configuration
 
@@ -110,9 +99,9 @@ For a sibling Home Assistant Core checkout, use symbolic links instead of
 copying files:
 
 ```shell
-ln -s ../../../jpi-ha core/homeassistant/components/jpi
+ln -s ../../../jpi-ha/custom_components/jpi core/homeassistant/components/jpi
 ln -s ../../../jpi-ha/tests core/tests/components/jpi
-ln -s ../../../jpi-ha core/config/custom_components/jpi
+ln -s ../../../jpi-ha/custom_components/jpi core/config/custom_components/jpi
 ```
 
 Install the sibling `pyjpi` checkout in Core's virtual environment:

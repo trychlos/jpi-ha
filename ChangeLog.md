@@ -2,6 +2,12 @@
 
 ## ChangeLog
 
+### 0.3.0-rc.0
+
+    Release date:
+
+    - Adopt the standard HACS custom integration layout
+
 ### 0.2.1
 
     Release date: 2026-09-06
